@@ -7,7 +7,7 @@ framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : [shiny, interactive, mathjax] # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
+mode        : standalone # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
@@ -68,7 +68,6 @@ dpends on wt, qsec.
     </form>
   </div>
   <div class="col-sm-8">
-    <div id="mpg" class="shiny-html-output"></div>
     <h3>Predicted mpg:</h3>
     <pre id="mpg" class="shiny-text-output"></pre>
   </div>
