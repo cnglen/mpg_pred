@@ -1,0 +1,65 @@
+---
+title       : MPG prediction
+subtitle    : This is just a toy project :)
+author      : Jacky Wang
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [shiny, interactive, mathjax] # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction
+
+In this report, we will analysis the mtcars data set to answer:
++ Is an automatic or manual transmission better for MPG?
++ Quantify the MPG difference between automatic and manual transmissions?
+
+--- .class #id 
+
+## Variables
+The model is choosen by AIC in a stepwise algorithm, which suggests using
++ wt: weight (lb/1000)
++ am: automatic or manual transmission
++ qsec: 1/4 mile time
++ am*wt (interacton term)
+
+Target:
++ mpg: Miles/(US) gallon
+
+--- .class #id 
+
+## Conclusion
+Model:
++ $$mpg = -2.937 wt + 1.017 qsec + (14.079 - 4.141 wt)$$
+
+Thus,
++ for fixed values of wt and qsec, the average difference of **mpg** is given by 14.079 - 4.141 wt
+
+So, the answer of the target quesition can't be answered directly, it
+dpends on wt, qsec.
+
+--- .class #id 
+
+## Demo
+```{r opts.label = 'shiny'}
+library(shiny)
+slidifyUI(
+    sidebarPanel(
+        numericInput("wt", "Weight (lb/1000),  range [1.5, 5.5]", 2.0),
+        numericInput("qsec", "1/4 mile time, range [13.5, 23.5]", 16.5),
+        selectInput("am",
+                    label = h3("Transmission"),
+                    choices = list("Manual" = 1.0, "Automatic" = 0.0),
+                    selected = 1.0)
+        ),
+    mainPanel(
+        tags$div(id = 'mpg', class='shiny-html-output'), # A bug? without this line, no output !! 
+        h3("Predicted mpg:"), 
+        verbatimTextOutput("mpg")
+        )
+    )
+```
+
