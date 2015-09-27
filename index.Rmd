@@ -7,7 +7,7 @@ framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : [shiny, interactive, mathjax] # {mathjax, quiz, bootstrap}
-mode        : standalone # {standalone, draft}
+mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
@@ -56,7 +56,7 @@ slidifyUI(
                     selected = 1.0)
         ),
     mainPanel(
-        #tags$div(id = 'mpg', class='shiny-html-output'), # A bug? without this line, no output !! 
+        tags$div(id = 'mpg', class='shiny-html-output'), # A bug? without this line, no output !! 
         h3("Predicted mpg:"), 
         verbatimTextOutput("mpg")
         )
